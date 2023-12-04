@@ -5,8 +5,9 @@
         <group>
             <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/ui/HoaDonForm.java</file>
             <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/ui/Home.java</file>
-            <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/ui/KhachHangForm.java</file>
+            <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/ui/NhanVienForm.java</file>
             <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/ui/MatHangForm.java</file>
+            <file>file:/C:/Users/tankh/OneDrive/Documents/NetBeansProjects/EduSys_PS35584_2/src/com/edusys/dao/NhanVienDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -85,5 +85,9 @@ public class NhanVienDAO extends NuocHoaShopDAO<NhanVien, String>{
         String sql = "SELECT * FROM nhanvien WHERE (manv LIKE ? OR tennv LIKE N'%' + ? + '%' OR email LIKE ?) and isdelete = 0 ";
         return this.selectBySql(sql, "%" + kw + "%", kw, "%" + kw + "%");
     }
+    public List<NhanVien> selectIsDelete(String kw){
+         String sql = "SELECT * FROM nhanvien WHERE (manv LIKE ? OR tennv LIKE N'%' + ? + '%' OR email LIKE ?) and isdelete = 1 ";
+        return this.selectBySql(sql, "%" + kw + "%", kw, "%" + kw + "%");
+    }
     
 }

@@ -139,7 +139,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Quản lý nhân viên ");
 
-        cboSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc", "Giới tính", "Vai trò", " " }));
+        cboSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc", "Giới tính", "Vai trò", "Đã xóa" }));
         cboSapXep.setBorder(null);
         cboSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,6 +554,17 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
                 this.row = -1;
                 updateStatus();
             }
+            case 3 ->{
+                this.sapXepTheoDaXoa();
+                this.clearForm();
+                this.row = -1;
+                btnMoi.setEnabled(false);
+                btnSua.setEnabled(false);
+                btnThem.setEnabled(false);
+                btnXoa.setEnabled(false);
+                //tblNhanVien.setEnabled(false);
+                //updateStatus();
+            }
             default -> {
                 this.fillTable();
                 this.clearForm();
@@ -780,6 +791,24 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
+    
+    void sapXepTheoDaXoa() {
+        DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
+        model.setRowCount(0);
+
+        try {
+            String keyWord = txtTim.getText();
+            List<NhanVien> list = dao.selectIsDelete(keyWord);
+
+
+            for (NhanVien nhanVien : list) {
+                model.addRow(new Object[]{nhanVien.getMaNV(), nhanVien.getMatKhau().replaceAll(".", "*"), nhanVien.getHoTen(),
+                     nhanVien.getEmail(), nhanVien.isVaiTro() ? "Trưởng phòng" : "Nhân viên", nhanVien.getDiaChi(), nhanVien.isGioiTinh() ? "Nam" : "Nu"});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
 
     void setForm(NhanVien nv) {
         txtMaNV.setText(nv.getMaNV());
@@ -818,6 +847,10 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
     void edit() {
         String manv = (String) tblNhanVien.getValueAt(this.row, 0);
         NhanVien nv = dao.selectById(manv);
+        if(nv == null){
+            MsgBox.alert(this, "Nhan vien da xoa hoac khong ton tai");
+            return;
+        }
         this.setForm(nv);
 
         this.updateStatus();
