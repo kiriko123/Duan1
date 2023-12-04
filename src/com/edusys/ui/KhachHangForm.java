@@ -456,8 +456,16 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Ngay sinh khong hop le");
             return;
         }
+        String ngaySinh = XDate.toString(dcsNgaySinh.getDate(), "dd:MM:yyyy").substring(6);
+        if(Integer.parseInt(ngaySinh) > 2004){
+            MsgBox.alert(this, "Chua du tuoi");
+            return;
+        }
         
-        
+        if(Integer.parseInt(ngaySinh) < 1950){
+            MsgBox.alert(this, "Ngay sinh khong hop le");
+            return;
+        }
 
         if (this.isValided()) {
 
@@ -487,6 +495,16 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Ngay sinh khong hop le");
             return;
         }
+        String ngaySinh = XDate.toString(dcsNgaySinh.getDate(), "dd:MM:yyyy").substring(6);
+        if(Integer.parseInt(ngaySinh) > 2004){
+            MsgBox.alert(this, "Chua du tuoi");
+            return;
+        }
+        
+        if(Integer.parseInt(ngaySinh) < 1950){
+            MsgBox.alert(this, "Ngay sinh khong hop le");
+            return;
+        }
         
         if (this.isValided()) {
             EmailValidator ev = new EmailValidator();
@@ -507,7 +525,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         this.clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
