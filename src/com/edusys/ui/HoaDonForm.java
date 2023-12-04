@@ -83,7 +83,11 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
         customizeComboBox(cboSapXep, new Color(63, 81, 181));
         customizeComboBox(cboMaKH, new Color(63, 81, 181));
-
+        
+        Date currentDate = new java.sql.Date(System.currentTimeMillis());
+        
+        //MsgBox.alert(this, XDate.toString(currentDate, "yyyy-MM-dd"));
+        dcsNgayXuat.setDate(currentDate);
     }
 
     /**
@@ -287,6 +291,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
         dcsNgayXuat.setBackground(new java.awt.Color(255, 255, 255));
         dcsNgayXuat.setDateFormatString("yyyy-MM-dd");
+        dcsNgayXuat.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(1, 72, 114));
@@ -676,6 +681,10 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         this.setForm(nv);
 
         this.row = -1;
+        Date currentDate = new java.sql.Date(System.currentTimeMillis());
+        
+        //MsgBox.alert(this, XDate.toString(currentDate, "yyyy-MM-dd"));
+        dcsNgayXuat.setDate(currentDate);
         this.updateStatus();
 
     }
