@@ -387,16 +387,16 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cboNam" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" max="32767" attributes="0"/>
                                   <Component id="jScrollPane6" alignment="0" pref="658" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="cboNam" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -406,16 +406,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cboNam" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cboNam" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="111" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jScrollPane6" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace pref="21" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -447,7 +447,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="33" red="33" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Top 3  s&#x1ea3;n ph&#x1ea9;m b&#xe1;n nhi&#x1ec1;u nh&#x1ea5;t"/>
+                        <Property name="text" type="java.lang.String" value="Top 3  s&#x1ea3;n ph&#x1ea9;m b&#xe1;n nhi&#x1ec1;u nh&#x1ea5;t theo n&#x103;m"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane5">
