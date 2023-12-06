@@ -137,7 +137,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Quản lý khách hàng");
 
-        cboSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc", "Giới tính", "Mã nhân viên", " " }));
+        cboSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lọc", "Giới tính", "Mã nhân viên", "Đã  xóa" }));
         cboSapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboSapXepActionPerformed(evt);
@@ -557,6 +557,16 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
                 this.row = -1;
                 updateStatus();
             }
+            case 3 ->{
+                this.sapXepTheoDaXoa();
+                this.clearForm();
+                this.row = -1;
+                btnMoi.setEnabled(false);
+                btnSua.setEnabled(false);
+                btnThem.setEnabled(false);
+                btnXoa.setEnabled(false);
+                
+            }
             default -> {
                 this.fillTable();
                 this.clearForm();
@@ -787,6 +797,23 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
+    
+    void sapXepTheoDaXoa() {
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+
+        try {
+            String keyWord = txtTim.getText();
+            List<KhachHang> list = dao.selectIsDelete(keyWord);
+
+            for (KhachHang kh : list) {
+                model.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.isGioiTinh() ? "Nam" : "Nu",
+                    XDate.toString(kh.getNgaySinh(), "yyyy-MM-dd"), kh.getEmail(), kh.getDiaChi(), kh.getMaNV()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
 
     void setForm(KhachHang nv) {
         txtMaKH.setText(nv.getMaKH());
@@ -847,6 +874,11 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
     void edit() {
         String manv = (String) tblKhachHang.getValueAt(this.row, 0);
         KhachHang nv = dao.selectById(manv);
+        
+        if(nv == null){
+            MsgBox.alert(this, "Nhan vien da xoa hoac khong ton tai");
+            return;
+        }
         this.setForm(nv);
 
         this.updateStatus();

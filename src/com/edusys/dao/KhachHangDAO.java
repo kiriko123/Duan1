@@ -83,4 +83,8 @@ public class KhachHangDAO extends NuocHoaShopDAO<KhachHang, String>{
         return this.selectBySql(sql, "%" + kw + "%", kw, "%" + kw + "%");
     }
     
+    public List<KhachHang> selectIsDelete(String kw){
+        String sql = "SELECT * FROM khachhang WHERE (makh LIKE ? OR tenkh LIKE N'%' + ? + '%' OR email LIKE ?) and isdelete = 1 ";
+        return this.selectBySql(sql, "%" + kw + "%", kw, "%" + kw + "%");
+    }
 }
