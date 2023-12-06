@@ -469,7 +469,7 @@ public final class ChiTietHoaDonForm extends javax.swing.JDialog {
         btnChiTiet.setBackground(new java.awt.Color(255, 145, 144));
         btnChiTiet.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icon/Graphicloads-100-Flat-Favourite-2.24.png"))); // NOI18N
-        btnChiTiet.setText("Xuất");
+        btnChiTiet.setText("Xuất PDF");
         btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChiTietActionPerformed(evt);
@@ -599,6 +599,20 @@ public final class ChiTietHoaDonForm extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(!this.isValided()){
+            MsgBox.alert(this, "Vui long nhap day du du lieu");
+            return;
+        }
+        try {
+            int sl = Integer.parseInt(txtSoLuong.getText());
+            if(sl < 0){
+                MsgBox.alert(this, "So luong phai lon hon 0");
+                return;
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Vui long nhap dung so luong");
+            return;
+        }
         this.update();
         
         List<Object[]> list = dao.getTongTien(hd.getMaHD());
@@ -732,7 +746,7 @@ public final class ChiTietHoaDonForm extends javax.swing.JDialog {
             double tongtien = (double) list.get(0)[0];
             lblTongTien.setText(String.format("%.2f", tongtien));
         }
-        txtMaHD.setText(hd.getMaHD());
+        txtMaHD.setText(String.valueOf(hd.getMaHD()));
 
         NhanVienDAO nvdao = new NhanVienDAO();
 
@@ -882,7 +896,7 @@ public final class ChiTietHoaDonForm extends javax.swing.JDialog {
     }
 
     void update() {
-        List<ChiTietHoaDon> listCT = dao.selectByMaHD(txtMaHD.getText());
+        List<ChiTietHoaDon> listCT = dao.selectByMaHD(Integer.parseInt(txtMaHD.getText()));
         
         ChiTietHoaDon nh = getForm();
         

@@ -15,8 +15,8 @@ import java.util.List;
  *
  * @author tankh
  */
-public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, String>{
-    String INSERT_SQL = "INSERT INTO hoadon VALUES (?, ?, ?, ?, ?, 0)";
+public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, Integer>{
+    String INSERT_SQL = "INSERT INTO hoadon VALUES ( ?, ?, ?, ?, 0)";
     String UPDATE_SQL = "UPDATE hoadon SET ngayxuat = ?, ghichu = ?, makh = ?, manv=?, isdelete=? WHERE mahd = ?";
     String DELETE_SQL= "DELETE FROM hoadon WHERE mahd = ?";
     String SELECT_ALL_SQL ="SELECT * FROM hoadon";
@@ -24,7 +24,7 @@ public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, String>{
     @Override
     public void insert(HoaDon entity) {
         XJDBC.update(INSERT_SQL, 
-                entity.getMaHD(), entity.getNgayXuat(), entity.getGhiChu(), entity.getMaKH(), entity.getMaNV()
+                 entity.getNgayXuat(), entity.getGhiChu(), entity.getMaKH(), entity.getMaNV()
                     );
     }
 
@@ -36,7 +36,7 @@ public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         XJDBC.update(DELETE_SQL, id);
     }
 
@@ -46,7 +46,7 @@ public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, String>{
     }
 
     @Override
-    public HoaDon selectById(String id) {
+    public HoaDon selectById(Integer id) {
         List<HoaDon> list = this.selectBySql(SELECT_BY_ID_SQL, id);
         if(list.isEmpty()){
             return null;
@@ -63,7 +63,7 @@ public class HoaDonDAO extends NuocHoaShopDAO<HoaDon, String>{
             ResultSet rs = XJDBC.query(sql, args);
             while(rs.next()){
                 HoaDon entity = new HoaDon();
-                entity.setMaHD(rs.getString("mahd"));
+                entity.setMaHD(rs.getInt("mahd"));
                 entity.setNgayXuat(rs.getDate("ngayxuat"));
                 entity.setGhiChu(rs.getString("ghichu"));   
                 entity.setMaKH(rs.getString("makh"));

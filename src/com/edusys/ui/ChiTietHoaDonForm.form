@@ -666,7 +666,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/edusys/icon/Graphicloads-100-Flat-Favourite-2.24.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t"/>
+            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t PDF"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietActionPerformed"/>

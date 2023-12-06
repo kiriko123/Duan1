@@ -10,14 +10,14 @@ package com.edusys.entity;
  */
 public class ChiTietHoaDon {
     private String maSP;
-    private String maHD;
+    private int maHD;
     private int soLuong;
     private String ghiChu;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(String maSP, String maHD, int soLuong, String ghiChu) {
+    public ChiTietHoaDon(String maSP, int maHD, int soLuong, String ghiChu) {
         this.maSP = maSP;
         this.maHD = maHD;
         this.soLuong = soLuong;
@@ -32,11 +32,11 @@ public class ChiTietHoaDon {
         this.maSP = maSP;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 

@@ -11,7 +11,7 @@ import java.util.Date;
  * @author tankh
  */
 public class HoaDon {
-    private String maHD;
+    private int maHD;
     private Date ngayXuat;
     private String maNV;
     private String maKH;
@@ -23,12 +23,14 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return maHD;
+        return "+maHD+";
     }
+
+    
     
     
 
-    public HoaDon(String maHD, Date ngayXuat, String maNV, String maKH, String ghiChu) {
+    public HoaDon(int maHD, Date ngayXuat, String maNV, String maKH, String ghiChu) {
         this.maHD = maHD;
         this.ngayXuat = ngayXuat;
         this.maNV = maNV;
@@ -36,11 +38,11 @@ public class HoaDon {
         this.ghiChu = ghiChu;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 

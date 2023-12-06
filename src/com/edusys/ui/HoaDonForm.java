@@ -80,6 +80,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         customizeTextField(txtTim, new Color(255, 255, 255));
         txtTim.setSize(64, 28);
         txtMaNV.setBackground(Color.gray);
+        
+        txtMaHD.setBackground(Color.gray);
 
         customizeComboBox(cboSapXep, new Color(63, 81, 181));
         customizeComboBox(cboMaKH, new Color(63, 81, 181));
@@ -185,6 +187,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(1, 72, 114));
         jLabel9.setText("Mã hóa đơn ");
 
+        txtMaHD.setEditable(false);
         txtMaHD.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         txtMaHD.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(203, 186, 241)));
 
@@ -493,7 +496,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Hoa don chua duoc chon");
             return;
         }
-        HoaDon ct = dao.selectById(txtMaHD.getText());
+        HoaDon ct = dao.selectById(Integer.parseInt(txtMaHD.getText()));
         if (ct == null) {
             MsgBox.alert(this, "Hoa don chua duoc chon");
             return;
@@ -620,7 +623,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     }
 
     void setForm(HoaDon nv) {
-        txtMaHD.setText(nv.getMaHD());
+        txtMaHD.setText(String.valueOf(nv.getMaHD()));
         txtMaNV.setText(nv.getMaNV());
         
         if (nv.getNgayXuat()!= null) {
@@ -669,7 +672,37 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         nv.setGhiChu(txtGhiChu.getText());
         nv.setNgayXuat(sqlNgayXuat);
         nv.setMaNV(txtMaNV.getText());
-        nv.setMaHD(txtMaHD.getText());
+        //nv.setMaHD(Integer.parseInt(txtMaHD.getText()));
+
+        return nv;
+    }
+    
+    HoaDon getFormUpdate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Get the current date
+        java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
+
+        // Extract and format the date from the chooser
+        Date ngayXuat = dcsNgayXuat.getDate();
+        java.sql.Date sqlNgayXuat = null;
+
+        if (ngayXuat != null) {
+            String formattedXuat = dateFormat.format(ngayXuat);
+
+            try {
+                sqlNgayXuat = java.sql.Date.valueOf(formattedXuat);
+            } catch (IllegalArgumentException e) {
+
+            }
+        }
+
+        HoaDon nv = new HoaDon();
+        nv.setMaKH((String) cboMaKH.getSelectedItem());
+        nv.setGhiChu(txtGhiChu.getText());
+        nv.setNgayXuat(sqlNgayXuat);
+        nv.setMaNV(txtMaNV.getText());
+        nv.setMaHD(Integer.parseInt(txtMaHD.getText()));
 
         return nv;
     }
@@ -690,7 +723,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     }
 
     void edit() {
-        String manv = (String) tblHoaDon.getValueAt(this.row, 0);
+        int manv =  (int) tblHoaDon.getValueAt(this.row, 0);
         HoaDon nv = dao.selectById(manv);
         this.setForm(nv);
 
@@ -712,7 +745,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         HoaDon nh = getForm();
         
         for (HoaDon hoaDon : listHD) {
-            if(hoaDon.getMaHD().equals(nh.getMaHD())){
+            if(hoaDon.getMaHD() == nh.getMaHD()){
                 MsgBox.alert(this, "Hoa don da co");
                 return;
             }
@@ -728,13 +761,14 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     }
 
     void update() {
-        HoaDon nh = getForm();
+        HoaDon nh = getFormUpdate();
         try {
             dao.update(nh);
             this.fillTable();
             MsgBox.alert(this, "Cập nhật thành công");
         } catch (Exception e) {
             MsgBox.alert(this, "Cập nhật thất bại");
+            e.printStackTrace();
         }
     }
 
@@ -746,7 +780,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
             if (MsgBox.comfirm(this, "Bạn muốn xóa hóa đơn này chứ ? ")) {
                 try {
-                    HoaDon hd = dao.selectById(mahd);
+                    HoaDon hd = dao.selectById(Integer.parseInt(mahd));
                     hd.setIsdelete(true);
                     dao.update(hd);
                     this.fillTable();
@@ -864,7 +898,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     }
 
     boolean isValided() {
-        if (txtMaHD.getText().isBlank() || txtMaNV.getText().isBlank() || dcsNgayXuat.getDate() == null) {
+        if (txtMaNV.getText().isBlank() || dcsNgayXuat.getDate() == null) {
             return false;
         }
         return true;

@@ -804,7 +804,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!Auth.isLogin()) {
             MsgBox.alert(this, "Vui long dang nhap lai");
-        } else {
+        }
+        else if(!Auth.isManager()){
+            MsgBox.alert(this, "Ban khong co quyen xem nhan vien");
+        }
+        else {
             form2.setBackground(new Color(227, 80, 168));
             form1.setBackground(new Color(143, 137, 183));
             form3.setBackground(new Color(143, 137, 183));
@@ -1050,7 +1054,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!Auth.isLogin()) {
             MsgBox.alert(this, "Vui long dang nhap lai");
-        } else {
+        }
+        else if(!Auth.isManager()){
+            MsgBox.alert(this, "Ban khong co quyen xem nhan vien");
+        }
+        else {
             form2.setBackground(new Color(227, 80, 168));
             form1.setBackground(new Color(143, 137, 183));
             form3.setBackground(new Color(143, 137, 183));

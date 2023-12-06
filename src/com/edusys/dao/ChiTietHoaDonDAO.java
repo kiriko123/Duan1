@@ -62,7 +62,7 @@ public class ChiTietHoaDonDAO extends NuocHoaShopDAO<ChiTietHoaDon, String>{
             ResultSet rs = XJDBC.query(sql, args);
             while(rs.next()){
                 ChiTietHoaDon entity = new ChiTietHoaDon();
-                entity.setMaHD(rs.getString("mahd"));
+                entity.setMaHD(rs.getInt("mahd"));
                 entity.setMaSP(rs.getString("masp"));
                 entity.setGhiChu(rs.getString("ghichu"));   
                 entity.setSoLuong(rs.getInt("soluong"));
@@ -75,9 +75,9 @@ public class ChiTietHoaDonDAO extends NuocHoaShopDAO<ChiTietHoaDon, String>{
             throw new RuntimeException();
         }
     }
-    public List<ChiTietHoaDon> selectByMaHD(String kw){
-        String sql = "SELECT * FROM chitiethoadon WHERE mahd LIKE ? ";
-        return this.selectBySql(sql, "%" + kw + "%");
+    public List<ChiTietHoaDon> selectByMaHD(int kw){
+        String sql = "SELECT * FROM chitiethoadon WHERE mahd = ? ";
+        return this.selectBySql(sql,  kw );
     }
     
     private List<Object[]> getListOfArray(String sql, String[] cols, Object...args){
@@ -98,7 +98,7 @@ public class ChiTietHoaDonDAO extends NuocHoaShopDAO<ChiTietHoaDon, String>{
         }
     }
     
-    public List<Object[]> getTongTien(String mahd){
+    public List<Object[]> getTongTien(int mahd){
         String sql = "{Call tongtiencua1hoadon(?)}";
         String[] cols = {"tongtien"};
         return this.getListOfArray(sql, cols, mahd);
