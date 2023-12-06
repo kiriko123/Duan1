@@ -615,6 +615,8 @@ public final class ChiTietHoaDonForm extends javax.swing.JDialog {
         if (!list.isEmpty() && list.get(0)[0] != null) {
             double tongtien = (double) list.get(0)[0];
             lblTongTien.setText(String.format("%.2f", tongtien));
+        } else{
+            lblTongTien.setText("0");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
